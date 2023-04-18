@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animal Crossing</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <style>
         * {
@@ -29,7 +30,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             color: #ffffff;
             padding: 30px;
-            width: 100%;
+            width: 200%;
             max-width: 400px;
         }
 
@@ -89,11 +90,12 @@
 <div class="container">
     <form method="POST" action="{{ url_for('index') }}">
         <h1>Animal Crossing Background Music</h1>
-        <img src="images/logo.png" alt="Description of the image">
+        <img src="https://github.com/ienriquez620/AnimalCrossingAPI/blob/c625b88ae79d3776ace48dc447aa4165f0bb7a36/templates/images/logo.png" alt="Description of the image">
         {{ form.csrf_token }}
 
-        <p> Enter an Hour: {{ form.hour(class="form-input") }}</p>
+        <p>Enter your Name: {{ form.name(class="form-input") }}</p>
 
+        <p> Enter an Hour: {{ form.hour(class="form-input") }}</p>
 
         <p> Choose a Weather Type: {{ form.weather(class="form-input") }}</p>
 
