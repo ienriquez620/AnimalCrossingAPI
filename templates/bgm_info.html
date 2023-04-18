@@ -15,7 +15,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #ff6f00, #b71c1c);
+            background: linear-gradient(135deg, palegreen, seagreen);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -48,7 +48,8 @@
             margin: 0 auto 20px;
             max-width: 100%;
         }
-        .custom-button {
+
+        input[type="submit"] {
             background-color: #5c6bc0;
             border: none;
             border-radius: 4px;
@@ -60,23 +61,36 @@
             width: 100%;
         }
 
+
+
         .custom-button:hover {
-            background-color: #3f51b5;
+            background-color: #024414;
 }
 
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Background Music</h1>
-        {% if length == 0 %}
-            <p>No Music available.</p>
-        {% else %}
-            {% for i in list_of_bgm %}
-                <music_uri="{{ i }}" alt="">
-            {% endfor %}
+        <h1>Chosen Background Music</h1>
+
+<p><strong>Hour:</strong> {{ hour_entered }}</p>
+<p><strong>Weather:</strong> {{ weather_entered }}</p>
+        {% if music_list %}
+    <ul>
+    {% for item in music_list %}
+        {% if item[2] == hour_entered and item[3] == weather_entered %}
+            <p><strong>
+                <a href="{{ item[1] }}" target="_blank">{{ item[0] }}</a>
+                <p><a href="/"><button>Back to Homepage</button></a></p>
+                </strong>
+            </p>
         {% endif %}
-        <a href="{{ url_for('index') }}" class="custom-button">Return</a>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No matching background music found.</p>
+{% endif %}
+
     </div>
 </body>
 </html>

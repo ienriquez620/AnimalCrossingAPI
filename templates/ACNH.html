@@ -88,15 +88,14 @@
 <body>
 <div class="container">
     <form method="POST" action="{{ url_for('index') }}">
-        <h1>Animal Crossing background music</h1>
-        <img src="https://www.nasa.gov/sites/default/files/styles/side_image/public/thumbnails/image/nasa-logo-web-rgb.png?itok=uDhKSTb1" alt="Nasa Logo">
+        <h1>Animal Crossing Background Music</h1>
+        <img src="images/logo.png" alt="Description of the image">
         {{ form.csrf_token }}
 
+        <p> Enter an Hour: {{ form.hour(class="form-input") }}</p>
 
-        {{ form.hour(class="form-input") }}
 
-
-        {{ form.weather(class="form-input") }}
+        <p> Choose a Weather Type: {{ form.weather(class="form-input") }}</p>
 
         {{ form.submit(class="form-submit") }}
     </form>
