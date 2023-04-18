@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animal Crossing</title>
 
+    <link rel="shortcut icon" href="{{ url_for('static', filename='icon.png') }}">
+
+
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <style>
         * {
@@ -15,8 +18,11 @@
             font-family: 'Roboto', sans-serif;
         }
 
+         a {
+        color: white;}
+
         body {
-            background: linear-gradient(135deg, cornflowerblue, darkblue);
+            background-image: url("../static/images/pattern.jpeg");
             display: flex;
             align-items: center;
             justify-content: center;
@@ -25,14 +31,33 @@
         }
 
         .container {
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(51, 147, 51, 0.75);
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             color: #ffffff;
             padding: 30px;
-            width: 200%;
-            max-width: 400px;
+            width: auto;
+            max-width: 700px;
         }
+
+        .container2 {
+            background-color: rgba(51, 147, 51, 0.75);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+            padding: 30px;
+            max-width: none;
+
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(51, 147, 51, 0.75);
+        }
+
 
         h1 {
             margin-bottom: 20px;
@@ -70,7 +95,7 @@
         }
 
         input[type="submit"] {
-            background-color: #5c6bc0;
+            background-color: #bee893;
             border: none;
             border-radius: 4px;
             color: #ffffff;
@@ -82,25 +107,50 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #3f51b5;
+            background-color: #bee893;
         }
+
     </style>
+
 </head>
 <body>
-<div class="container">
+<body style="display: flex; flex-direction: column;">
+<div class="container" >
     <form method="POST" action="{{ url_for('index') }}">
+
+        <header>
         <h1>Animal Crossing Background Music</h1>
-        <img src="https://github.com/ienriquez620/AnimalCrossingAPI/blob/c625b88ae79d3776ace48dc447aa4165f0bb7a36/templates/images/logo.png" alt="Description of the image">
+        <center><img src="../static/images/logo.png" alt="Animal Crossing New Horizons Logo" style="max-width: 40%; height: auto;"></center>
+        </header>
+
         {{ form.csrf_token }}
 
-        <p>Enter your Name: {{ form.name(class="form-input") }}</p>
+        {% if error_messages %}
+        <div class="error-messages">
+            {% for message in error_messages %}
+            <div class="error-message">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
 
-        <p> Enter an Hour: {{ form.hour(class="form-input") }}</p>
 
-        <p> Choose a Weather Type: {{ form.weather(class="form-input") }}</p>
+        <div>Enter your Name:</div><div>{{ form.name(class="form-input", placeholder="Name") }}</div>
 
-        {{ form.submit(class="form-submit") }}
+        <div> Enter an Hour:</div><div> {{ form.hour(class="form-input") }}</div>
+
+        <div> Choose a Weather Type:</div><div> {{ form.weather(class="form-input") }}</div>
+
+        <div>{{ form.submit(class="form-submit") }}</div>
+
+
     </form>
 </div>
+
+<footer>
+  <div class="container2">
+    <p class="text-center">Background from: <a href="https://catwithmonocle.com/news/2020/02/06/animal-crossing-new-horizons-nook-pattern-wallpaper/">https://catwithmonocle.com/news/2020/02/06/animal-crossing-new-horizons-nook-pattern-wallpaper/</a></p>
+  </div>
+</footer>
+
 </body>
 </html>

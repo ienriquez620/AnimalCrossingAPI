@@ -27,13 +27,6 @@ class Music(FlaskForm):
     submit = SubmitField('Submit')
 
 
-# class Villager(FlaskForm):
-#     hour = IntegerField("Select an Hour", validators=[NumberRange(min=0, max=24, message='Invalid length')])
-#     weather = SelectField("Select the Weather", choices=["Sunny",
-#                                                          "Rainy",
-#                                                          "Snowy"
-#                                                          ])
-#     submit = SubmitField('Submit')
 
 def request_music():
     music_url = "http://acnhapi.com/v1a/backgroundmusic/"
@@ -45,23 +38,27 @@ def request_music():
 bgm_info = main_functions.read_from_file("bgm.json")  # reading from the newly created JSON file
 
 
-# def request_villager():
-#     villager_url = "https://acnhapi.com/v1/villagers/"
-#     response2 = requests.get(villager_url).json()  # making the request
-#     main_functions.save_to_file(response2, "villager.json")  # saving the response to a JSON file
-#     return response2
-#
-#
-# villager_info = main_functions.read_from_file("villager.json")  # reading from the newly created JSON file
-
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     form = Music()
     if request.method == "POST":
         name_entered = request.form['name']
-        hour_entered = int(request.form['hour'])
+        hour_entered = request.form['hour']
         weather_entered = request.form['weather']
+
+        # Check for missing fields
+        error_messages = []
+
+        if not name_entered:
+            error_messages.append("Please enter your name.")
+
+        if not hour_entered:
+            error_messages.append("Please enter the hour.")
+
+        # If all fields are entered, continue with the search
+        if not error_messages:
+            hour_entered = int(hour_entered)
 
         with open('bgm.json', 'r') as f:
             bgm_music = json.load(f)
@@ -75,7 +72,7 @@ def index():
 
         return render_template("bgm_info.html", name_entered=name_entered, music_list=music_list,
                                hour_entered=hour_entered,
-                               weather_entered=weather_entered)
+                               weather_entered=weather_entered, error_messages=error_messages)
     return render_template('ACNH.html', form=form)
 
 

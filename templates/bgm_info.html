@@ -14,8 +14,12 @@
             font-family: 'Roboto', sans-serif;
         }
 
+        a {
+        color: white;}
+
         body {
-            background: linear-gradient(135deg, palegreen, seagreen);
+            background-image: url("../static/images/pattern.jpeg");
+
             display: flex;
             align-items: center;
             justify-content: center;
@@ -24,13 +28,13 @@
         }
 
         .container {
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(51, 147, 51, 0.75);
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
             color: #ffffff;
             padding: 30px;
-            width: 100%;
-            max-width: 400px;
+            width: auto;
+            max-width: 700px;
         }
 
         h1, h2 {
@@ -50,26 +54,64 @@
         }
 
         input[type="submit"] {
-            background-color: #5c6bc0;
+            background-color: #bee893;
             border: none;
             border-radius: 4px;
-            color: #ffffff;
+            color: #339333BF;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
             padding: 10px;
             text-align: center;
             width: 100%;
         }
 
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            font-family: "Roboto Light", sans-serif;
+            font-size: 16px;
+            border: #339333BF;
+          }
+          th, td {
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+              border: #339333BF;
+          }
+          th {
+            background-color: #bee893;
+            font-weight: bold;
+            color: #339333BF;
+              border: #339333BF;
+          }
+          audio {
+            display: block;
+            margin-bottom: 8px;
+          }
+          a {
+            color: #bee893;
+            text-decoration: none;
+          }
+          a:hover {
+            text-decoration: underline;
+          }
+          button {
+            background-color: #bee893;
+            color: #339333BF;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+          }
+          button:hover {
+            background-color: #bee893;
+          }
 
-
-
-
-        .custom-button:hover {
-            background-color: #024414;
-}
 
     </style>
+
 </head>
 <body>
     <div class="container">
@@ -77,22 +119,40 @@
         <h2>Here is the background music you selected:</h2>
 
 <p><strong>Hour:</strong> {{ hour_entered }}</p>
+
 <p><strong>Weather:</strong> {{ weather_entered }}</p>
-        {% if music_list %}
-    <ul>
-    {% for item in music_list %}
+
+       <table>
+  <thead>
+    <tr>
+      <th>Music Name</th>
+      <th>Music URL</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if music_list %}
+      {% for item in music_list %}
         {% if item[2] == hour_entered and item[3] == weather_entered %}
-            <p><strong>
-                <a href="{{ item[1] }}" target="_blank">{{ item[0] }}</a>
-                <p><a href="/"><button>Back to Homepage</button></a></p>
-                </strong>
-            </p>
+          <tr>
+            <td>{{ item[0] }}</td>
+            <td>
+              <audio controls autoplay>
+                <source src="{{ item[1] }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio>
+              <a href="{{ item[1] }}" target="_blank">Open in new tab</a>
+            </td>
+          </tr>
         {% endif %}
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No matching background music found.</p>
-{% endif %}
+      {% endfor %}
+    {% else %}
+      <tr>
+        <td colspan="2"><strong>No matching background music found.</strong></td>
+      </tr>
+    {% endif %}
+  </tbody>
+</table>
+<p><a href="/"><button>Back to Homepage</button></a></p>
 
     </div>
 </body>
