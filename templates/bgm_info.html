@@ -115,14 +115,15 @@
 </head>
 <body>
     <div class="container">
-        <h1>Hello {{ name_entered }}!</h1>
+        <h1>Hello <span style="color: #f8ffd5">{{ name_entered }}</span>!</h1>
         <h2>Here is the background music you selected:</h2>
 
+ <!-- The user's input for hour and weather are displayed here -->
 <p><strong>Hour:</strong> {{ hour_entered }}</p>
 
 <p><strong>Weather:</strong> {{ weather_entered }}</p>
 
-       <table>
+        <table> <!-- A table is created to display the matching background music -->
   <thead>
     <tr>
       <th>Music Name</th>
@@ -130,6 +131,7 @@
     </tr>
   </thead>
   <tbody>
+  <!-- If there is a matching background music, display it in a row in the table -->
     {% if music_list %}
       {% for item in music_list %}
         {% if item[2] == hour_entered and item[3] == weather_entered %}
@@ -146,7 +148,7 @@
         {% endif %}
       {% endfor %}
     {% else %}
-      <tr>
+      <tr><!-- If there is no matching background music, display a message -->
         <td colspan="2"><strong>No matching background music found.</strong></td>
       </tr>
     {% endif %}

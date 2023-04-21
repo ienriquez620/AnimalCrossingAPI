@@ -70,6 +70,12 @@
             text-align: center;
         }
 
+        h2 {
+            font-size: 16px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
         form {
             display: grid;
             gap: 10px;
@@ -122,15 +128,19 @@
 <body>
 <body style="display: flex; flex-direction: column;">
 <div class="container" >
+    <!-- This is the form element -->
     <form method="POST" action="{{ url_for('index') }}">
 
-        <header>
+        <header> <!-- This is the header for the form -->
         <h1>Animal Crossing Background Music</h1>
+            <h2>Use this form to select an <strong>Animal Crossing New Horizons</strong> background track based on weather and the hour of the day!</h2>
         <center><img src="../static/images/logo.png" alt="Animal Crossing New Horizons Logo" style="max-width: 40%; height: auto;"></center>
         </header>
 
+        <!-- This line inserts the CSRF token into the form -->
         {{ form.csrf_token }}
 
+        <!-- This block renders any error messages that may occur during form submission -->
         {% if error_messages %}
         <div class="error-messages">
             {% for message in error_messages %}
@@ -139,10 +149,10 @@
         </div>
         {% endif %}
 
-
+        <!-- These are the input fields for the form -->
         <div>Enter your Name:</div><div>{{ form.name(class="form-input", placeholder="Name") }}</div>
 
-        <div> Enter an Hour:</div><div> {{ form.hour(class="form-input") }}</div>
+        <div> Choose an Hour (Between 0-24):</div><div> {{ form.hour(class="form-input") }}</div>
 
         <div> Choose a Weather Type:</div><div> {{ form.weather(class="form-input") }}</div>
 
